@@ -169,6 +169,25 @@ public:
         delete temp;
     }
 
+    void every_other_element() {
+        Node* temp = head;
+        cout << "Every other: ";
+
+        bool firstout = true;
+        while (temp){
+            if(!firstout) cout << " ";
+            cout << temp->data;
+            firstout = false;
+
+            if (!temp->next) break;
+            temp = temp->next;
+
+            if (!temp->next) break;
+            temp = temp->next;
+        }
+        cout << "\n"
+    }
+
     ~DoublyLinkedList() {
         while (head) {
             Node* temp = head;
