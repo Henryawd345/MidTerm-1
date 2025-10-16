@@ -226,6 +226,9 @@ int main() {
     //cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
 
     DoublyLinkedList list;
+    DoublyLinkedList empty_ls;
+    DoublyLinkedList one_ls;
+    DoublyLinkedList two_ls;
 
     list.push_back(10);
     list.push_back(50);
@@ -236,9 +239,21 @@ int main() {
     list.push_back(59);
     list.push_back(63);
 
+    cout<< "Empty "; 
+    empty_ls.every_other_element();
+
+    one_ls.push_back(936);
+    cout<< "One Item "; 
+    one_ls.every_other_element();
+
+    two_ls.push_back(88);
+    two_ls.push_back(487);
+    cout<< "Two Item "; 
+    two_ls.every_other_element();
+
     cout<< "List print: " ; 
     list.print();
-    cout<< "List backward; ";
+    cout<< "List backward: ";
     list.print_reverse();
 
     cout<< "\n";
