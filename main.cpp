@@ -52,38 +52,46 @@ public:
         }
 
         // Link newNode after temp
-        newNode->next = temp->next; //
-        newNode->prev = temp;   //
+        newNode->next = temp->next; //newNode points to temp's old next
+        newNode->prev = temp;   //newNode points back to temp
         if (temp->next)
-            temp->next->prev = newNode;
+            temp->next->prev = newNode;// old next now points to newNode
         else
             tail = newNode;
-        temp->next = newNode;
+        temp->next = newNode; // temp now point to newNode
     }
 
+
+
+    // delte the node that the data is equal to value
     void delete_val(int value) {
-        if (!head) return;
+        if (!head) return; //empty list
 
+        //find matching node
         Node* temp = head;
-        
         while (temp && temp->data != value)
-            temp = temp->next;
+            temp = temp->next;//walk right
 
-        if (!temp) return; 
-
+        if (!temp) return; //if not found
+        //link left previous over temp
         if (temp->prev)
             temp->prev->next = temp->next;
         else
+            //removing the head
             head = temp->next; 
 
+        //link right next over temp
         if (temp->next)
             temp->next->prev = temp->prev;
         else
+            //removing the tail
             tail = temp->prev; 
 
-        delete temp;
+        delete temp;// free the removed node
     }
 
+
+    // delete the node at position of the node
     void delete_pos(int pos) {
         if (!head) {
             cout << "List is empty." << endl;
@@ -91,12 +99,13 @@ public:
         }
     
         if (pos == 1) {
-            pop_front();
+            pop_front();// head removal from pop_front
             return;
         }
     
+
         Node* temp = head;
-    
+    //walk to pos of the node
         for (int i = 1; i < pos; i++){
             if (!temp) {
                 cout << "Position doesn't exist." << endl;
@@ -111,35 +120,40 @@ public:
         }
     
         if (!temp->next) {
+            //use pop_back to move node
             pop_back();
             return;
         }
     
-        Node* tempPrev = temp->prev;
-        tempPrev->next = temp->next;
-        temp->next->prev = tempPrev;
-        delete temp;
+        Node* tempPrev = temp->prev; //keep pointer to the prev
+        tempPrev->next = temp->next; //keep pointer to the next
+        temp->next->prev = tempPrev; //next and prev are now point over temp
+        delete temp;//free removed node
     }
 
+    //append new node at the tail
     void push_back(int v) {
-        Node* newNode = new Node(v);
+        Node* newNode = new Node(v); // new node
         if (!tail)
+            //if empty head and tail point to the same
             head = tail = newNode;
         else {
-            tail->next = newNode;
-            newNode->prev = tail;
-            tail = newNode;
+            tail->next = newNode; //old tail point to newnode
+            newNode->prev = tail; //new node point to old tail
+            tail = newNode; // move newnode to the tail
         }
     }
-    
+
+
+    //append new node at the head
     void push_front(int v) {
-        Node* newNode = new Node(v);
-        if (!head)
+        Node* newNode = new Node(v); 
+        if (!head)//if empty head and tail point to the same
             head = tail = newNode;
         else {
-            newNode->next = head;
-            head->prev = newNode;
-            head = newNode;
+            newNode->next = head; //new node point to old head
+            head->prev = newNode; //new head point to newnode
+            head = newNode; // move head to new node
         }
     }
     
@@ -271,6 +285,10 @@ int main() {
     list.print();
     list.delete_val(130); 
     cout << "After delete_val(130):     "; 
+    list.print();
+
+    list.delete_pos(3); 
+    cout << "After delete_pos(3):     "; 
     list.print();
 
     list.every_other_element();
