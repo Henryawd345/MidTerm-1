@@ -9,43 +9,51 @@ private:
         int data;
         Node* prev;
         Node* next;
-        Node(int val, Node* p = nullptr, Node* n = nullptr) {
+        Node(int val, Node* p = nullptr, Node* n = nullptr) { //constructor
             data = val; 
             prev = p;
             next = n;
         }
     };
-
+    // pointer to first and last node
     Node* head;
     Node* tail;
 
 public:
+
+    //constructor start with empty list
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
+
+    // insert a value after position  insert_after(value, position)
     void insert_after(int value, int position) {
         if (position < 0) {
-            cout << "Position must be >= 0." << endl;
+            cout << "Position must be >= 0." << endl; // if position is less than 0 return
             return;
         }
 
-        Node* newNode = new Node(value);
+        Node* newNode = new Node(value); // create new node
         if (!head) {
+            // empty list: head and tail point to the new node
             head = tail = newNode;
             return;
         }
 
+        // walk to the node at the position enter
         Node* temp = head;
         for (int i = 0; i < position && temp; ++i)
-            temp = temp->next;
+            temp = temp->next;// move to right node by i++
 
         if (!temp) {
+            // position is bigger than current size
             cout << "Position exceeds list size. Node not inserted.\n";
-            delete newNode;
+            delete newNode;// avoid leak
             return;
         }
 
-        newNode->next = temp->next;
-        newNode->prev = temp;
+        // Link newNode after temp
+        newNode->next = temp->next; //
+        newNode->prev = temp;   //
         if (temp->next)
             temp->next->prev = newNode;
         else
