@@ -223,7 +223,7 @@ public:
 };
 
 int main() {
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
+    //cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
 
     DoublyLinkedList list;
 
@@ -236,7 +236,21 @@ int main() {
     list.push_back(59);
     list.push_back(63);
 
-    cout<< "List print: " ; list.print();
+    cout<< "List print: " ; 
+    list.print();
+    cout<< "List backward; ";
+    list.print_reverse();
+
+    cout<< "\n";
+
+    list.insert_after(99, 1);
+    cout << "After insert_after(99,1): "; 
+    list.print();
+    list.delete_val(130); 
+    cout << "After delete_val(130):     "; 
+    list.print();
+
+    list.every_other_element();
     
     return 0;
 }
