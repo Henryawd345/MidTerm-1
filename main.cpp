@@ -185,7 +185,7 @@ public:
             if (!temp->next) break;
             temp = temp->next;
         }
-        cout << "\n"
+        cout << "\n";
     }
 
     ~DoublyLinkedList() {
@@ -225,6 +225,18 @@ public:
 int main() {
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
 
+    DoublyLinkedList list;
+
+    list.push_back(10);
+    list.push_back(50);
+    list.push_back(60);
+    list.push_back(44);
+    list.push_back(130);
+    list.push_back(770);
+    list.push_back(59);
+    list.push_back(63);
+
+    cout<< "List print: " ; list.print();
     
     return 0;
 }
