@@ -157,6 +157,7 @@ public:
         }
     }
     
+    // remove the head node
     void pop_front() {
 
         if (!head) {
@@ -164,33 +165,40 @@ public:
             return;
         }
 
-        Node * temp = head;
+        Node * temp = head; // node to delete
 
         if (head->next) {
-            head = head->next;
-            head->prev = nullptr;
+            head = head->next; // move head right
+            head->prev = nullptr; //new head has no prev
         }
         else
-            head = tail = nullptr;
-        delete temp;
+            //removing the only node there
+            head = tail = nullptr; // list now is empty
+        delete temp;//free old node
     }
 
+
+
+     // remove the tail node
     void pop_back() {
         if (!tail) {
             cout << "List is empty." << endl;
             return;
         }
-        Node * temp = tail;
+        Node * temp = tail;// node to delete
 
         if (tail->prev) {
-            tail = tail->prev;
-            tail->next = nullptr;
+            tail = tail->prev;// move tail left
+            tail->next = nullptr; //new tail has no next
         }
         else
-            head = tail = nullptr;
-        delete temp;
+            //removing the only node there
+            head = tail = nullptr;// list now is empty
+        delete temp;//free old node
     }
 
+
+    // print the 1st, 3rd, 5th...... node with out modifying the link
     void every_other_element() {
         Node* temp = head;
         cout << "Every other: ";
@@ -198,25 +206,31 @@ public:
         bool firstout = true;
         while (temp){
             if(!firstout) cout << " ";
-            cout << temp->data;
+            cout << temp->data; // output the current node data
             firstout = false;
 
-            if (!temp->next) break;
-            temp = temp->next;
+            // if possible move one step
+            if (!temp->next) break; //no i+1 we already printed the first one
+            temp = temp->next; // move to i+1 but no print
 
-            if (!temp->next) break;
-            temp = temp->next;
+            // if possible again move to the second step
+            if (!temp->next) break; // if there are none then don
+            temp = temp->next; // move to i+2 this will be printed
         }
         cout << "\n";
     }
 
+
+    //destructor
     ~DoublyLinkedList() {
         while (head) {
-            Node* temp = head;
-            head = head->next;
-            delete temp;
+            Node* temp = head; // remember current head
+            head = head->next; // move head first
+            delete temp; //delete the old node
         }
     }
+
+    //print the list from head to tail
     void print() {
         Node* current = head;
         if (!current) {
@@ -225,11 +239,12 @@ public:
         }
         while (current) {
             cout << current->data << " ";
-            current = current->next;
+            current = current->next; // move to the right
         }
         cout << endl;
     }
 
+    //print the list from tail to head
     void print_reverse() {
         Node* current = tail;
         if (!current) { 
@@ -238,7 +253,7 @@ public:
         }
         while (current) {
             cout << current->data << " ";
-            current = current->prev;
+            current = current->prev; // move left
         }
         cout << endl;
     }
@@ -260,14 +275,16 @@ int main() {
     list.push_back(770);
     list.push_back(59);
     list.push_back(63);
-
+    // testing when list is empty
     cout<< "Empty "; 
     empty_ls.every_other_element();
 
+    // testing when list is only one item
     one_ls.push_back(936);
     cout<< "One Item "; 
     one_ls.every_other_element();
 
+    // testing when list contains 2 items
     two_ls.push_back(88);
     two_ls.push_back(487);
     cout<< "Two Item "; 
@@ -280,17 +297,19 @@ int main() {
 
     cout<< "\n";
 
-    list.insert_after(99, 1);
+    list.insert_after(99, 1); // after index 1
     cout << "After insert_after(99,1): "; 
     list.print();
-    list.delete_val(130); 
+    list.delete_val(130); // deleting the value 130
     cout << "After delete_val(130):     "; 
     list.print();
 
-    list.delete_pos(3); 
+    list.delete_pos(3); //delete at node 3
     cout << "After delete_pos(3):     "; 
     list.print();
 
+
+    //1st, 3rd, 5th ....
     list.every_other_element();
     
     return 0;
